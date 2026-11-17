@@ -1,0 +1,186 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    background-color: #e9ecef;
+    min-height: 100vh;
+    font-family: 'Nunito', 'Arial Black', sans-serif;
+}
+
+/* Painel Lateral */
+.painel-controle {
+    width: 350px;
+    background: #ffffff;
+    padding: 20px;
+    border-right: 2px solid #ccc;
+    font-family: Arial, sans-serif;
+    z-index: 10;
+}
+
+.painel-controle h1 { font-size: 20px; margin-bottom: 15px; color: #222; }
+.box { background: #f8f9fa; padding: 12px; border-radius: 8px; margin-bottom: 12px; border: 1px solid #dee2e6; }
+.box h3 { font-size: 14px; margin-bottom: 8px; color: #e64a19; }
+.box p { font-size: 12px; color: #555; margin-bottom: 8px; }
+
+input, select {
+    width: 100%;
+    padding: 8px 10px;
+    margin-bottom: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+select { font-weight: bold; background-color: #fff3e0; border-color: #ffcc80; }
+#input-bipar { border: 2px solid #e64a19; font-weight: bold; }
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #e64a19;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+button:hover { background-color: #d84315; }
+.btn-imprimir { background-color: #2e7d32; font-size: 15px; }
+.btn-imprimir:hover { background-color: #1b5e20; }
+.erro { color: #d32f2f !important; font-weight: bold; }
+
+/* Área de Visualização */
+.area-impressao {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 25px;
+    overflow: auto;
+}
+
+/* =========================================
+   ESTILO BASE DO CARTAZ
+   ========================================= */
+.cartaz {
+    background-color: #ffffff;
+    border: 2.5px solid #111111;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    position: relative;
+    font-family: 'Nunito', sans-serif;
+}
+
+.cabecalho-aproveite {
+    background-color: #e84418;
+    color: #ffffff;
+    text-align: center;
+    font-weight: 900;
+    border-radius: 14px;
+    letter-spacing: 1px;
+    line-height: 1.1;
+}
+
+.corpo-cartaz {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+/* Coluna Esquerda: Nome do Produto */
+.coluna-produto {
+    width: 44%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 2%;
+    padding-right: 1%;
+}
+
+.produto-nome {
+    color: #111111;
+    font-weight: 900;
+    line-height: 0.90;
+    text-align: center;
+    word-spacing: 9999px;
+}
+
+/* Coluna Direita: Preço */
+.coluna-preco {
+    width: 56%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.bloco-valor-completo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.etiqueta-unidade {
+    color: #f500d6;
+    font-weight: 900;
+    align-self: flex-start;
+    margin-left: 4%;
+    letter-spacing: 0.5px;
+}
+
+.valor-box {
+    display: flex;
+    align-items: flex-start;
+    color: #f500d6;
+    font-weight: 900;
+    line-height: 0.80;
+}
+
+.info-controle {
+    position: absolute;
+    font-family: Arial, sans-serif;
+    color: #666;
+}
+
+/* =========================================
+   A5 HORIZONTAL (210mm x 148mm)
+   ========================================= */
+.modo-a5-h { width: 210mm; height: 148mm; padding: 6mm 8mm; }
+.modo-a5-h .cabecalho-aproveite { font-size: 56px; padding: 8px 0; border-radius: 14px; }
+.modo-a5-h .produto-nome { font-size: 64px; }
+.modo-a5-h .etiqueta-unidade { font-size: 20px; margin-bottom: 6px; }
+.modo-a5-h .preco-inteiro { font-size: 215px; letter-spacing: -7px; } /* Preço ainda maior sem o rodapé de kilo */
+.modo-a5-h .preco-virgula { font-size: 112px; margin-top: 8px; }
+.modo-a5-h .preco-centavos { font-size: 112px; margin-top: 4px; letter-spacing: -3px; }
+.modo-a5-h .info-controle { bottom: 4mm; right: 6mm; font-size: 9px; }
+
+/* =========================================
+   A3 HORIZONTAL (420mm x 297mm)
+   ========================================= */
+.modo-a3-h { width: 420mm; height: 297mm; padding: 12mm 16mm; border-width: 5px; }
+.modo-a3-h .cabecalho-aproveite { font-size: 112px; padding: 16px 0; border-radius: 28px; }
+.modo-a3-h .produto-nome { font-size: 130px; }
+.modo-a3-h .etiqueta-unidade { font-size: 40px; margin-bottom: 12px; }
+.modo-a3-h .preco-inteiro { font-size: 430px; letter-spacing: -14px; } /* Preço ainda maior sem o rodapé de kilo */
+.modo-a3-h .preco-virgula { font-size: 224px; margin-top: 16px; }
+.modo-a3-h .preco-centavos { font-size: 224px; margin-top: 8px; letter-spacing: -6px; }
+.modo-a3-h .info-controle { bottom: 8mm; right: 12mm; font-size: 18px; }
+
+/* REGRAS DE IMPRESSÃO */
+@media print {
+    body { background: none; }
+    .no-print { display: none !important; }
+    .area-impressao { padding: 0; margin: 0; display: block; }
+    .cartaz { box-shadow: none; margin: 0; page-break-after: always; }
+    @page { margin: 0; }
+}

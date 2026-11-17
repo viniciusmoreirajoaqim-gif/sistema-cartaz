@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Cartazes - Modelo Aproveite</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Painel de Controle -->
+    <div class="painel-controle no-print">
+        <h1>Gerador de Cartazes</h1>
+        
+        <div class="box">
+            <h3>1. Tamanho do Cartaz (Deitado)</h3>
+            <select id="select-tamanho" onchange="mudarTamanho()">
+                <option value="a5-h">A5 Horizontal / Deitado (210 x 148 mm)</option>
+                <option value="a3-h">A3 Horizontal / Deitado (420 x 297 mm)</option>
+            </select>
+        </div>
+
+        <div class="box">
+            <h3>2. Bipar Produto</h3>
+            <p>Clique no campo e bipe o código de barras:</p>
+            <input type="text" id="input-bipar" placeholder="Ex: 7891000100103" autofocus>
+            <p id="mensagem-erro" class="erro"></p>
+        </div>
+
+        <div class="box">
+            <h3>3. Cadastrar Novo Produto</h3>
+            <form id="form-cadastro">
+                <input type="text" id="cad-codigo" placeholder="Código de Barras (EAN)" required>
+                <input type="text" id="cad-interno" placeholder="Cód. Interno (Ex: 109304)" required>
+                <input type="text" id="cad-nome" placeholder="Nome (Ex: Mac Nissin 85g Monica)" required>
+                <input type="number" id="cad-preco" step="0.01" placeholder="Preço (Ex: 2.49)" required>
+                <input type="text" id="cad-unidade" placeholder="Unidade (Ex: UNIDADE, KG)" required>
+                <button type="submit">Salvar Produto</button>
+            </form>
+        </div>
+
+        <div class="box">
+            <h3>4. Impressão</h3>
+            <button onclick="window.print()" class="btn-imprimir">🖨️ Imprimir Cartaz</button>
+        </div>
+    </div>
+
+    <!-- Área do Cartaz -->
+    <div class="area-impressao">
+        <div class="cartaz modo-a5-h" id="cartaz">
+            
+            <!-- Cabeçalho Laranja Arredondado -->
+            <div class="cabecalho-aproveite">APROVEITE</div>
+            
+            <!-- Corpo Principal -->
+            <div class="corpo-cartaz">
+                <div class="coluna-produto">
+                    <div class="produto-nome" id="cartaz-nome">Mac Nissin 85g Monica</div>
+                </div>
+
+                <div class="coluna-preco">
+                    <div class="bloco-valor-completo">
+                        <div class="etiqueta-unidade">
+                            R$ | <span id="cartaz-unidade">UNIDADE</span>
+                        </div>
+                        
+                        <div class="valor-box">
+                            <span class="preco-inteiro" id="cartaz-inteiro">2</span>
+                            <span class="preco-virgula">,</span>
+                            <span class="preco-centavos" id="cartaz-centavos">49</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Código Interno e Data discretos no canto inferior direito -->
+            <div class="info-controle">
+                <span id="cartaz-interno">109304</span> | <span id="cartaz-data">16/11/2026</span>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
