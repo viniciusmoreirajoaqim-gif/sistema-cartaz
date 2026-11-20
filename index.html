@@ -3,18 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerador de Cartazes - Modelo Aproveite</title>
+    <title>Gerador de Cartazes - Aproveite / Leve + Pague</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@800&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Painel de Controle -->
+    <!-- TELA DE LOGIN -->
+    <div id="tela-login" class="overlay-login no-print">
+        <div class="box-login">
+            <h2>Acesso Restrito</h2>
+            <p>Digite usuário e senha para acessar o gerador de cartazes</p>
+            <form id="form-login">
+                <input type="text" id="login-usuario" placeholder="Usuário" required autofocus>
+                <input type="password" id="login-senha" placeholder="Senha" required>
+                <button type="submit">Entrar</button>
+                <p id="login-erro" class="erro" style="margin-top: 10px;"></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- PAINEL DE CONTROLE -->
     <div class="painel-controle no-print">
-        <h1>Gerador de Cartazes</h1>
-        
+        <div class="topo-painel">
+            <h1>Gerador de Cartazes</h1>
+            <button type="button" onclick="fazerLogout()" class="btn-sair">Sair</button>
+        </div>
+
         <div class="box">
             <h3>1. Tamanho do Cartaz (Deitado)</h3>
             <select id="select-tamanho" onchange="mudarTamanho()">
@@ -26,59 +43,101 @@
         <div class="box">
             <h3>2. Bipar Produto</h3>
             <p>Clique no campo e bipe o código de barras:</p>
-            <input type="text" id="input-bipar" placeholder="Ex: 7891000100103" autofocus>
+            <input type="text" id="input-bipar" placeholder="Ex: 7896274600021">
             <p id="mensagem-erro" class="erro"></p>
         </div>
 
         <div class="box">
-            <h3>3. Cadastrar Novo Produto</h3>
+            <h3>3. Cadastrar / Atualizar Produto</h3>
             <form id="form-cadastro">
                 <input type="text" id="cad-codigo" placeholder="Código de Barras (EAN)" required>
-                <input type="text" id="cad-interno" placeholder="Cód. Interno (Ex: 109304)" required>
-                <input type="text" id="cad-nome" placeholder="Nome (Ex: Mac Nissin 85g Monica)" required>
-                <input type="number" id="cad-preco" step="0.01" placeholder="Preço (Ex: 2.49)" required>
+                <input type="text" id="cad-interno" placeholder="Cód. Interno (Ex: 601802)" required>
+                <input type="text" id="cad-nome" placeholder="Nome (Ex: Açúcar Cristal Alto Alegre 5kg)" required>
+                <input type="number" id="cad-preco" step="0.01" placeholder="Preço Unidade (Ex: 16.89)" required>
                 <input type="text" id="cad-unidade" placeholder="Unidade (Ex: UNIDADE, KG)" required>
+                <input type="number" id="cad-qtd-minima" min="2" placeholder="A partir de quantas un.? (Ex: 3 - opcional)">
+                <input type="number" id="cad-preco-atacado" step="0.01" placeholder="Preço 3 / Atacado (Ex: 16.49 - opcional)">
                 <button type="submit">Salvar Produto</button>
             </form>
         </div>
 
         <div class="box">
             <h3>4. Impressão</h3>
-            <button onclick="window.print()" class="btn-imprimir">🖨️ Imprimir Cartaz</button>
+            <button type="button" onclick="window.print()" class="btn-imprimir">🖨️ Imprimir Cartaz</button>
         </div>
     </div>
 
-    <!-- Área do Cartaz -->
+    <!-- ÁREA DO CARTAZ -->
     <div class="area-impressao">
         <div class="cartaz modo-a5-h" id="cartaz">
-            
-            <!-- Cabeçalho Laranja Arredondado -->
-            <div class="cabecalho-aproveite">APROVEITE</div>
-            
-            <!-- Corpo Principal -->
-            <div class="corpo-cartaz">
-                <div class="coluna-produto">
-                    <div class="produto-nome" id="cartaz-nome">Mac Nissin 85g Monica</div>
-                </div>
 
-                <div class="coluna-preco">
-                    <div class="bloco-valor-completo">
-                        <div class="etiqueta-unidade">
-                            R$ | <span id="cartaz-unidade">UNIDADE</span>
-                        </div>
-                        
-                        <div class="valor-box">
-                            <span class="preco-inteiro" id="cartaz-inteiro">2</span>
-                            <span class="preco-virgula">,</span>
-                            <span class="preco-centavos" id="cartaz-centavos">49</span>
+            <!-- MODO PADRÃO: APROVEITE (1 PREÇO) -->
+            <div id="layout-aproveite" class="layout-cartaz">
+                <div class="cabecalho-aproveite">APROVEITE</div>
+
+                <div class="corpo-cartaz">
+                    <div class="coluna-produto">
+                        <div class="produto-nome" id="cartaz-nome">Mac Nissin 85g Monica</div>
+                    </div>
+
+                    <div class="coluna-preco">
+                        <div class="bloco-valor-completo">
+                            <div class="etiqueta-unidade">
+                                R$ | <span id="cartaz-unidade">UNIDADE</span>
+                            </div>
+
+                            <div class="valor-box">
+                                <span class="preco-inteiro" id="cartaz-inteiro">2</span>
+                                <span class="preco-virgula">,</span>
+                                <span class="preco-centavos" id="cartaz-centavos">49</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Código Interno e Data discretos no canto inferior direito -->
+            <!-- MODO LEVE + PAGUE (QUANDO TEM PREÇO 3 / A PARTIR DE X UNIDADES) -->
+            <div id="layout-leve-pague" class="layout-cartaz layout-leve-pague" style="display: none;">
+                <div class="cabecalho-leve-pague">LEVE + PAGUE -</div>
+
+                <div class="corpo-leve-pague">
+                    <!-- Coluna Esquerda: Nome + Preço Unidade -->
+                    <div class="lp-coluna-esquerda">
+                        <div class="lp-nome" id="lp-nome">Açúcar Cristal Alto Alegre 5kg</div>
+
+                        <div class="lp-bloco-unitario">
+                            <div class="lp-etiqueta-unidade">
+                                R$ | <span id="lp-unidade-esq">UNIDADE</span>
+                            </div>
+                            <div class="lp-valor-unitario">
+                                <span class="lp-unit-inteiro" id="lp-unit-inteiro">16</span>
+                                <span class="lp-unit-virgula">,</span>
+                                <span class="lp-unit-centavos" id="lp-unit-centavos">89</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Coluna Direita: Regra de Quantidade + Preço 3 -->
+                    <div class="lp-coluna-direita">
+                        <div class="lp-cabecalho-regra">
+                            <div class="lp-regra-texto" id="lp-regra-texto">COMPRANDO A PARTIR DE 3 UNIDADES</div>
+                            <div class="lp-etiqueta-unidade lp-etiqueta-dir">
+                                R$ | <span id="lp-unidade-dir">UNIDADE</span>
+                            </div>
+                        </div>
+
+                        <div class="lp-valor-promocional">
+                            <span class="lp-promo-inteiro" id="lp-promo-inteiro">16</span>
+                            <span class="lp-promo-virgula">,</span>
+                            <span class="lp-promo-centavos" id="lp-promo-centavos">49</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Código Interno e Data -->
             <div class="info-controle">
-                <span id="cartaz-interno">109304</span> | <span id="cartaz-data">16/11/2026</span>
+                <span id="cartaz-interno">109304</span> | <span id="cartaz-data">19/11/2026</span>
             </div>
 
         </div>
