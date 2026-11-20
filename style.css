@@ -8,12 +8,63 @@ body {
     display: flex;
     background-color: #e9ecef;
     min-height: 100vh;
-    font-family: 'Nunito', 'Arial Black', sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
-/* Painel Lateral */
+/* =========================================
+   TELA DE LOGIN
+   ========================================= */
+
+.overlay-login {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(rgba(15, 20, 26, 0.65), rgba(15, 20, 26, 0.65)), url('fundo-login.png.jfif');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    font-family: Arial, sans-serif;
+}
+
+.box-login {
+    background: #ffffff;
+    padding: 32px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 360px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    text-align: center;
+}
+
+.box-login h2 {
+    color: #e64a19;
+    margin-bottom: 8px;
+    font-size: 22px;
+}
+
+.box-login p {
+    color: #555;
+    font-size: 13px;
+    margin-bottom: 20px;
+}
+
+.box-login input {
+    margin-bottom: 12px;
+    padding: 10px;
+}
+
+/* =========================================
+   PAINEL LATERAL
+   ========================================= */
 .painel-controle {
     width: 350px;
+    min-width: 350px;
     background: #ffffff;
     padding: 20px;
     border-right: 2px solid #ccc;
@@ -21,8 +72,34 @@ body {
     z-index: 10;
 }
 
-.painel-controle h1 { font-size: 20px; margin-bottom: 15px; color: #222; }
-.box { background: #f8f9fa; padding: 12px; border-radius: 8px; margin-bottom: 12px; border: 1px solid #dee2e6; }
+.topo-painel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.topo-painel h1 {
+    font-size: 20px;
+    color: #222;
+    margin: 0;
+}
+
+.btn-sair {
+    width: auto;
+    padding: 6px 12px;
+    background-color: #6c757d;
+    font-size: 12px;
+}
+.btn-sair:hover { background-color: #5a6268; }
+
+.box {
+    background: #f8f9fa;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    border: 1px solid #dee2e6;
+}
 .box h3 { font-size: 14px; margin-bottom: 8px; color: #e64a19; }
 .box p { font-size: 12px; color: #555; margin-bottom: 8px; }
 
@@ -36,8 +113,16 @@ input, select {
     font-size: 14px;
 }
 
-select { font-weight: bold; background-color: #fff3e0; border-color: #ffcc80; }
-#input-bipar { border: 2px solid #e64a19; font-weight: bold; }
+select {
+    font-weight: bold;
+    background-color: #fff3e0;
+    border-color: #ffcc80;
+}
+
+#input-bipar {
+    border: 2px solid #e64a19;
+    font-weight: bold;
+}
 
 button {
     width: 100%;
@@ -52,72 +137,90 @@ button {
     cursor: pointer;
 }
 button:hover { background-color: #d84315; }
+
 .btn-imprimir { background-color: #2e7d32; font-size: 15px; }
 .btn-imprimir:hover { background-color: #1b5e20; }
+
 .erro { color: #d32f2f !important; font-weight: bold; }
 
-/* Área de Visualização */
+/* =========================================
+   BASE DO CARTAZ
+   ========================================= */
 .area-impressao {
     flex: 1;
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    padding: 25px;
+    padding: 20px;
     overflow: auto;
 }
 
-/* =========================================
-   ESTILO BASE DO CARTAZ
-   ========================================= */
 .cartaz {
     background-color: #ffffff;
     border: 2.5px solid #111111;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     position: relative;
-    font-family: 'Nunito', sans-serif;
+    overflow: hidden;
 }
 
+.layout-cartaz {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+}
+
+/* =========================================
+   LAYOUT 1: APROVEITE (PREÇO ÚNICO)
+   ========================================= */
 .cabecalho-aproveite {
     background-color: #e84418;
     color: #ffffff;
     text-align: center;
-    font-weight: 900;
+    font-family: 'Baloo 2', cursive, sans-serif;
+    font-weight: 800;
     border-radius: 14px;
-    letter-spacing: 1px;
-    line-height: 1.1;
+    letter-spacing: 2px;
+    line-height: 0.95;
+    width: 100%;
+    flex-shrink: 0;
 }
 
 .corpo-cartaz {
     display: flex;
     flex: 1;
+    min-height: 0;
     align-items: center;
     justify-content: space-between;
+    gap: 14px; /* Espaço entre nome do produto e preço no Aproveite */
     width: 100%;
+    overflow: hidden;
 }
 
-/* Coluna Esquerda: Nome do Produto */
 .coluna-produto {
-    width: 44%;
+    width: 45%;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-left: 2%;
-    padding-right: 1%;
+    padding: 0 1%;
 }
 
 .produto-nome {
     color: #111111;
-    font-weight: 900;
-    line-height: 0.90;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    line-height: 0.92;
     text-align: center;
-    word-spacing: 9999px;
+    word-break: break-word;
 }
 
-/* Coluna Direita: Preço */
 .coluna-preco {
-    width: 56%;
+    width: 55%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -128,20 +231,138 @@ button:hover { background-color: #d84315; }
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 4px; /* Espaço vertical entre R$|UNIDADE e o preço no Aproveite */
 }
 
 .etiqueta-unidade {
     color: #f500d6;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 900;
     align-self: flex-start;
     margin-left: 4%;
     letter-spacing: 0.5px;
+    line-height: 1.05;
 }
 
 .valor-box {
     display: flex;
     align-items: flex-start;
     color: #f500d6;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    line-height: 0.80;
+}
+
+/* =========================================
+   LAYOUT 2: LEVE + PAGUE
+   ========================================= */
+.cabecalho-leve-pague {
+    background-color: #df0000;
+    color: #ffffff;
+    text-align: center;
+    font-family: 'Baloo 2', cursive, sans-serif;
+    font-weight: 800;
+    letter-spacing: 1px;
+    line-height: 0.95;
+    width: 100%;
+    flex-shrink: 0;
+}
+
+.corpo-leve-pague {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 8px;
+    padding-bottom: 10px;
+    gap: 12px; /* Espaço entre coluna esquerda e direita */
+    overflow: hidden;
+}
+
+.lp-coluna-esquerda {
+    width: 47%;
+    height: 100%;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; /* Espaço vertical entre nome e preço unitário */
+}
+
+.lp-nome {
+    color: #111111;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    line-height: 0.95;
+    text-align: center;
+    word-break: break-word;
+    width: 100%;
+}
+
+.lp-bloco-unitario {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: flex-start;
+    margin-left: 4%;
+    gap: 3px; /* Espaço entre R$|UNIDADE e preço unitário */
+}
+
+.lp-etiqueta-unidade {
+    color: #f500d6;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    line-height: 1.05;
+    text-transform: uppercase;
+}
+
+.lp-valor-unitario {
+    display: flex;
+    align-items: flex-start;
+    color: #111111;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    line-height: 0.82;
+}
+
+.lp-coluna-direita {
+    width: 53%;
+    height: 100%;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding-left: 6px;
+    gap: 8px; /* Espaço entre regra/unidade e preço promocional */
+}
+
+.lp-cabecalho-regra {
+    width: 100%;
+    text-align: left;
+}
+
+.lp-regra-texto {
+    color: #f500d6;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    line-height: 1.0;
+    text-transform: uppercase;
+}
+
+.lp-etiqueta-dir {
+    margin-top: 2px;
+}
+
+.lp-valor-promocional {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    color: #f500d6;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 900;
     line-height: 0.80;
 }
@@ -149,34 +370,66 @@ button:hover { background-color: #d84315; }
 .info-controle {
     position: absolute;
     font-family: Arial, sans-serif;
-    color: #666;
+    color: #888;
 }
 
 /* =========================================
    A5 HORIZONTAL (210mm x 148mm)
    ========================================= */
-.modo-a5-h { width: 210mm; height: 148mm; padding: 6mm 8mm; }
-.modo-a5-h .cabecalho-aproveite { font-size: 56px; padding: 8px 0; border-radius: 14px; }
-.modo-a5-h .produto-nome { font-size: 64px; }
-.modo-a5-h .etiqueta-unidade { font-size: 20px; margin-bottom: 6px; }
-.modo-a5-h .preco-inteiro { font-size: 215px; letter-spacing: -7px; } /* Preço ainda maior sem o rodapé de kilo */
-.modo-a5-h .preco-virgula { font-size: 112px; margin-top: 8px; }
-.modo-a5-h .preco-centavos { font-size: 112px; margin-top: 4px; letter-spacing: -3px; }
-.modo-a5-h .info-controle { bottom: 4mm; right: 6mm; font-size: 9px; }
+.modo-a5-h { width: 210mm; height: 148mm; padding: 3.5mm 5mm; }
+
+/* Aproveite */
+.modo-a5-h .cabecalho-aproveite { font-size: 90px; border-radius: 14px; padding: 14px 0; }
+.modo-a5-h .produto-nome { font-size: 80px; }
+.modo-a5-h .etiqueta-unidade { font-size: 40px; margin-bottom: 4px; }
+.modo-a5-h .preco-inteiro { font-size: 280px; letter-spacing: -6px; }
+.modo-a5-h .preco-virgula { font-size: 150px; margin-top: 5px; }
+.modo-a5-h .preco-centavos { font-size: 150px; margin-top: 2px; letter-spacing: -3px; }
+
+/* Leve + Pague (Preço unitário em 60px) */
+.modo-a5-h .cabecalho-leve-pague { font-size: 78px; padding: 18px 22px; border-radius: 16px; }
+.modo-a5-h .lp-nome { font-size: 65px; }
+.modo-a5-h .lp-etiqueta-unidade { font-size: 25px; }
+.modo-a5-h .lp-unit-inteiro { font-size: 90px; letter-spacing: -3px; }
+.modo-a5-h .lp-unit-virgula { font-size: 30px; margin-top: 3px; }
+.modo-a5-h .lp-unit-centavos { font-size: 30px; margin-top: 2px; letter-spacing: -1.5px; }
+.modo-a5-h .lp-regra-texto { font-size: 30px; }
+.modo-a5-h .lp-promo-inteiro { font-size: 220px; letter-spacing: -7px; }
+.modo-a5-h .lp-promo-virgula { font-size: 100px; margin-top: 6px; }
+.modo-a5-h .lp-promo-centavos { font-size: 100px; margin-top: 3px; letter-spacing: -3px; }
+
+.modo-a5-h .info-controle { bottom: 2mm; right: 4mm; font-size: 9px; }
 
 /* =========================================
    A3 HORIZONTAL (420mm x 297mm)
    ========================================= */
-.modo-a3-h { width: 420mm; height: 297mm; padding: 12mm 16mm; border-width: 5px; }
-.modo-a3-h .cabecalho-aproveite { font-size: 112px; padding: 16px 0; border-radius: 28px; }
-.modo-a3-h .produto-nome { font-size: 130px; }
-.modo-a3-h .etiqueta-unidade { font-size: 40px; margin-bottom: 12px; }
-.modo-a3-h .preco-inteiro { font-size: 430px; letter-spacing: -14px; } /* Preço ainda maior sem o rodapé de kilo */
-.modo-a3-h .preco-virgula { font-size: 224px; margin-top: 16px; }
-.modo-a3-h .preco-centavos { font-size: 224px; margin-top: 8px; letter-spacing: -6px; }
-.modo-a3-h .info-controle { bottom: 8mm; right: 12mm; font-size: 18px; }
+.modo-a3-h { width: 420mm; height: 297mm; padding: 7mm 10mm; border-width: 5px; }
 
-/* REGRAS DE IMPRESSÃO */
+/* Aproveite A3 */
+.modo-a3-h .cabecalho-aproveite { font-size: 124px; border-radius: 28px; padding: 28px 0; }
+.modo-a3-h .produto-nome { font-size: 170px; }
+.modo-a3-h .etiqueta-unidade { font-size: 50px; margin-bottom: 8px; }
+.modo-a3-h .preco-inteiro { font-size: 310px; letter-spacing: -12px; }
+.modo-a3-h .preco-virgula { font-size: 164px; margin-top: 10px; }
+.modo-a3-h .preco-centavos { font-size: 164px; margin-top: 4px; letter-spacing: -6px; }
+
+/* Leve + Pague A3 (Preço unitário em 120px) */
+.modo-a3-h .cabecalho-leve-pague { font-size: 150px; padding: 26px 34px; border-radius: 32px; }
+.modo-a3-h .lp-nome { font-size: 130px; }
+.modo-a3-h .lp-etiqueta-unidade { font-size: 70px; }
+.modo-a3-h .lp-unit-inteiro { font-size: 190px; letter-spacing: -6px; }
+.modo-a3-h .lp-unit-virgula { font-size: 60px; margin-top: 6px; }
+.modo-a3-h .lp-unit-centavos { font-size: 60px; margin-top: 4px; letter-spacing: -3px; }
+.modo-a3-h .lp-regra-texto { font-size: 70px; }
+.modo-a3-h .lp-promo-inteiro { font-size: 444px; letter-spacing: -14px; }
+.modo-a3-h .lp-promo-virgula { font-size: 192px; margin-top: 12px; }
+.modo-a3-h .lp-promo-centavos { font-size: 192px; margin-top: 6px; letter-spacing: -6px; }
+
+.modo-a3-h .info-controle { bottom: 4mm; right: 8mm; font-size: 18px; }
+
+/* =========================================
+   REGRAS DE IMPRESSÃO
+   ========================================= */
 @media print {
     body { background: none; }
     .no-print { display: none !important; }
